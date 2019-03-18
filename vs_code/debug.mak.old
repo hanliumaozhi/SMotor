@@ -6,7 +6,7 @@ BINARYDIR := Debug
 
 #Additional flags
 PREPROCESSOR_MACROS := DEBUG=1 flash_layout STM32F303xE
-INCLUDE_DIRS := ..\motor_control\Inc ..\motor_control\Drivers\CMSIS\Include ..\motor_control\Drivers\CMSIS\Device\ST\STM32F3xx\Include ..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc ..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc\Legacy ../svpwm
+INCLUDE_DIRS := ..\motor_control\Inc ..\motor_control\Drivers\CMSIS\Include ..\motor_control\Drivers\CMSIS\Device\ST\STM32F3xx\Include ..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc ..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc\Legacy ../svpwm ../coordinate_change
 LIBRARY_DIRS := 
 LIBRARY_NAMES := 
 ADDITIONAL_LINKER_INPUTS := 

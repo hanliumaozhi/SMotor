@@ -31,6 +31,7 @@
 #include "string.h"
 #include "svpwm.h"
 #include "coordinate_change.h"
+#include "drv8301.h"
 
 /* USER CODE END Includes */
 
@@ -118,6 +119,9 @@ int main(void)
 	MX_TIM3_Init();
 	MX_USART2_UART_Init();
 	/* USER CODE BEGIN 2 */
+	// init drv8301
+	drv8301_setup(&hspi3, SPI3_EN_GPIO_Port, SPI3_EN_Pin);
+	
 	HAL_TIM_Base_Start(&htim2);
 	svpwm_setup(22.2, 0.00005);
 
