@@ -5,39 +5,41 @@
 #include "svpwm.h"
 
 
+float SQRT3 = 1.73205080757;
+
 int sector_sv;
 
-double Udc_sv;
-double pwm_interval_sv;
-double T_a_sv;
-double T_b_sv;
-double T_c_sv;
+float Udc_sv;
+float pwm_interval_sv;
+float T_a_sv;
+float T_b_sv;
+float T_c_sv;
 
 int A_sv;
 int B_sv;
 int C_sv;
 int N_sv;
 
-double V_ref1;
-double V_ref2;
-double V_ref3;
+float V_ref1;
+float V_ref2;
+float V_ref3;
 
-double T_1;
-double T_2;
-double T_3;
-double T_4;
-double T_5;
-double T_6;
-double T_7;
+float T_1;
+float T_2;
+float T_3;
+float T_4;
+float T_5;
+float T_6;
+float T_7;
 
-void svpwm_setup(double Udc, double pwm_interval)
+void svpwm_setup(float Udc, float pwm_interval)
 {
     Udc_sv = Udc;
     pwm_interval_sv = pwm_interval;
 }
 
 
-void svpwm_cal(double V_alpha, double V_beta)
+void svpwm_cal(float V_alpha, float V_beta)
 {
     sector_sv = 0;
     T_a_sv = 0.0;

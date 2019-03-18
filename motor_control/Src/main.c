@@ -28,6 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "string.h"
 #include "svpwm.h"
 
 /* USER CODE END Includes */
@@ -80,6 +81,12 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+	char msg[64];
+	memset(msg, 0, 64);
+	uint32_t counter = 0;
+	uint32_t total_time = 0;
+	uint32_t pre_counter = 0;
+	uint32_t post_counter = 0;
 
   /* USER CODE END Init */
 
@@ -101,6 +108,8 @@ int main(void)
   MX_TIM3_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+	HAL_TIM_Base_Start(&htim2);
+	svpwm_setup(22.2, 0.00005);
 
   /* USER CODE END 2 */
 
@@ -109,7 +118,19 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  pre_counter = __HAL_TIM_GET_COUNTER(&htim2);
+	  svpwm_cal(12, 13);
+	  post_counter = __HAL_TIM_GET_COUNTER(&htim2);
+	  total_time += (post_counter - pre_counter);
+	  ++counter;
+	  if (counter == 1000){
+		  sprintf(msg, "time:%lf \r\n", total_time/1000.0);
+		  HAL_UART_Transmit(&huart2, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
+		  counter = 0;
+		  total_time = 0;
+	  }
+	  
+	 
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
