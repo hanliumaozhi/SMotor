@@ -47,7 +47,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeIncludeSearchPath>.;$(TOOLCHAIN_ROOT)\arm-eabi\include\c++\7.2.0;$(TOOLCHAIN_ROOT)\arm-eabi\include\c++\7.2.0\arm-eabi\thumb\fpu\cortex_m4;$(TOOLCHAIN_ROOT)\arm-eabi\include\c++\7.2.0\backward;$(TOOLCHAIN_ROOT)\lib\gcc\arm-eabi\7.2.0\include;$(TOOLCHAIN_ROOT)\lib\gcc\arm-eabi\7.2.0\include-fixed;$(TOOLCHAIN_ROOT)\arm-eabi\sys-include;$(TOOLCHAIN_ROOT)\arm-eabi\include;..\motor_control\Inc;..\motor_control\Drivers\CMSIS\Include;..\motor_control\Drivers\CMSIS\Device\ST\STM32F3xx\Include;..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc;..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc\Legacy;..\svpwm;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>.;$(TOOLCHAIN_ROOT)\arm-eabi\include\c++\7.2.0;$(TOOLCHAIN_ROOT)\arm-eabi\include\c++\7.2.0\arm-eabi\thumb\fpu\cortex_m4;$(TOOLCHAIN_ROOT)\arm-eabi\include\c++\7.2.0\backward;$(TOOLCHAIN_ROOT)\lib\gcc\arm-eabi\7.2.0\include;$(TOOLCHAIN_ROOT)\lib\gcc\arm-eabi\7.2.0\include-fixed;$(TOOLCHAIN_ROOT)\arm-eabi\sys-include;$(TOOLCHAIN_ROOT)\arm-eabi\include;..\motor_control\Inc;..\motor_control\Drivers\CMSIS\Include;..\motor_control\Drivers\CMSIS\Device\ST\STM32F3xx\Include;..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc;..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc\Legacy;..\svpwm;..\coordinate_change;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
     <NMakeForcedIncludes>$(ProjectDir)\gcc_Debug.h;$(VISUALGDB_DIR)\gcc_compat.h;$(BSP_ROOT)\stm32_compat.h;$(NMakeForcedIncludes)</NMakeForcedIncludes>
     <NMakeBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /build "$(ProjectPath)" "/solution:$(SolutionPath)"  "/config:$(Configuration)" "/platform:$(Platform)"</NMakeBuildCommandLine>
     <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)"  "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
@@ -79,6 +79,7 @@
   </ImportGroup>
   <ItemGroup />
   <ItemGroup>
+    <ClCompile Include="..\coordinate_change\coordinate_change.c" />
     <ClCompile Include="..\motor_control\Src\gpio.c" />
     <ClCompile Include="..\motor_control\Src\adc.c" />
     <ClCompile Include="..\motor_control\Src\spi.c" />
@@ -109,6 +110,7 @@
     <ClCompile Include="..\motor_control\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c.c" />
     <ClCompile Include="..\motor_control\Drivers\STM32F3xx_HAL_Driver\Src\stm32f3xx_hal_i2c_ex.c" />
     <ClCompile Include="..\svpwm\svpwm.c" />
+    <ClInclude Include="..\coordinate_change\coordinate_change.h" />
     <ClInclude Include="..\svpwm\svpwm.h" />
     <None Include="stm32.mak" />
     <ClCompile Include="$(BSP_ROOT)\STM32F3xxxx\StartupFiles\startup_stm32f303xe.c" />

@@ -336,9 +336,15 @@
     <ClCompile Include="..\svpwm\svpwm.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\coordinate_change\coordinate_change.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\svpwm\svpwm.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\coordinate_change\coordinate_change.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

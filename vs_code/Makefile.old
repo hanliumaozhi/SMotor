@@ -60,7 +60,7 @@ error:
 	$(error Invalid configuration, please check your inputs)
 endif
 
-SOURCEFILES :=
+SOURCEFILES := ../motor_control/Src/gpio.c ../motor_control/Src/adc.c ../motor_control/Src/spi.c ../motor_control/Src/tim.c ../motor_control/Src/usart.c ../motor_control/Src/stm32f3xx_it.c ../motor_control/Src/stm32f3xx_hal_msp.c ../motor_control/Src/main.c ../motor_control/Drivers/CMSIS/Device/ST/STM32F3xx/Source/Templates/system_stm32f3xx.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc_ex.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart_ex.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr_ex.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi_ex.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash_ex.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_gpio.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc_ex.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_cortex.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_tim.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_tim_ex.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_dma.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c.c ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c_ex.c ../svpwm/svpwm.c $(BSP_ROOT)/STM32F3xxxx/StartupFiles/startup_stm32f303xe.c
 EXTERNAL_LIBS := 
 EXTERNAL_LIBS_COPIED := $(foreach lib, $(EXTERNAL_LIBS),$(BINARYDIR)/$(notdir $(lib)))
 
@@ -223,3 +223,128 @@ $(BINARYDIR)/%.o : %.cxx $(all_make_files) |$(BINARYDIR)
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER)F $(@:.o=.dep)
 
 #VisualGDB: GeneratedRules				#<--- All lines below are auto-generated. Remove this line to suppress auto-generation of file rules.
+
+
+$(BINARYDIR)/gpio.o : ../motor_control/Src/gpio.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/adc.o : ../motor_control/Src/adc.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/spi.o : ../motor_control/Src/spi.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/tim.o : ../motor_control/Src/tim.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/usart.o : ../motor_control/Src/usart.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_it.o : ../motor_control/Src/stm32f3xx_it.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_msp.o : ../motor_control/Src/stm32f3xx_hal_msp.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/main.o : ../motor_control/Src/main.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/system_stm32f3xx.o : ../motor_control/Drivers/CMSIS/Device/ST/STM32F3xx/Source/Templates/system_stm32f3xx.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_adc.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_adc_ex.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc_ex.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_uart.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_uart_ex.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart_ex.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_pwr.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_pwr_ex.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr_ex.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_spi.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_spi_ex.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_spi_ex.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_flash.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_flash_ex.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash_ex.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_gpio.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_gpio.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_rcc.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_rcc_ex.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_rcc_ex.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_cortex.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_cortex.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_tim.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_tim.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_tim_ex.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_tim_ex.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_dma.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_dma.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_i2c.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/stm32f3xx_hal_i2c_ex.o : ../motor_control/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c_ex.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/svpwm.o : ../svpwm/svpwm.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
+
+$(BINARYDIR)/startup_stm32f303xe.o : $(BSP_ROOT)/STM32F3xxxx/StartupFiles/startup_stm32f303xe.c $(all_make_files) |$(BINARYDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CC_DEPENDENCY_FILE_SPECIFIER) $(@:.o=.dep)
+
