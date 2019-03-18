@@ -12,6 +12,8 @@ void drv8301_setup(SPI_HandleTypeDef* spiHandle, GPIO_TypeDef* drv8301_port, uin
 	DRV8301 = spiHandle;
 	DRV8301_PORT = drv8301_port;
 	DRV8301_PIN = drv8301_pin;
+	
+	HAL_GPIO_WritePin(DRV8301_PORT, DRV8301_PIN, GPIO_PIN_SET);
 }
 
 void drv8301_init(void)

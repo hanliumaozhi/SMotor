@@ -339,12 +339,24 @@
     <ClCompile Include="..\coordinate_change\coordinate_change.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\drv8301\drv8301.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\as5048a\as5048a.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\svpwm\svpwm.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\coordinate_change\coordinate_change.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\drv8301\drv8301.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\as5048a\as5048a.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

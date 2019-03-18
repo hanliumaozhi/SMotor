@@ -32,6 +32,7 @@
 #include "svpwm.h"
 #include "coordinate_change.h"
 #include "drv8301.h"
+#include "as5048a.h"
 
 /* USER CODE END Includes */
 
@@ -98,6 +99,8 @@ int main(void)
 	float theta;
 	float alpha;
 	float beta = 0.23;
+	int falut_counter = 0;
+	bool is_error;
 
 	/* USER CODE END Init */
 
@@ -121,7 +124,8 @@ int main(void)
 	/* USER CODE BEGIN 2 */
 	// init drv8301
 	drv8301_setup(&hspi3, SPI3_EN_GPIO_Port, SPI3_EN_Pin);
-	
+	// init as5048a
+	as5048a_setup(&hspi2, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
 	HAL_TIM_Base_Start(&htim2);
 	svpwm_setup(22.2, 0.00005);
 
@@ -134,18 +138,24 @@ int main(void)
 		/* USER CODE END WHILE */
 		pre_counter = __HAL_TIM_GET_COUNTER(&htim2);
 		//svpwm_cal(12, 13);
-		Clarke(a, b, c, &alpha, &beta);
+		/*Clarke(a, b, c, &alpha, &beta);
 		Park(alpha, beta, theta, &d, &q);
 		InvPark(d, q, theta, &alpha, &beta);
-		svpwm_cal(alpha, beta);
+		svpwm_cal(alpha, beta);*/
+		is_error = as5048a_read();
+		if (!is_error){
+			++falut_counter;
+		}
+	
 		post_counter = __HAL_TIM_GET_COUNTER(&htim2);
 		total_time += (post_counter - pre_counter);
 		++counter;
 		if (counter == 10000) {
-			sprintf(msg, "time:%lf \r\n", total_time / 10000.0);
+			sprintf(msg, "time:%lf error:%d p:%f\r\n", total_time / 10000.0, falut_counter, position_val);
 			HAL_UART_Transmit(&huart2, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
 			counter = 0;
 			total_time = 0;
+			falut_counter = 0;
 		}
 	  
 	 
