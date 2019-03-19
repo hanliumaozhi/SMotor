@@ -66,6 +66,9 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+float duty_cycle = 10;
+int sub_counter = 0;
+
 /* USER CODE END 0 */
 
 /**
@@ -125,9 +128,12 @@ int main(void)
 	
 	// init inverter
 	inverter_setup(&htim1, &hspi3, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
-	inverter_init(&hadc1, &hadc2, DRV8301_EN_GPIO_Port, DRV8301_EN_Pin);
+	inverter_init(&hadc1, &hadc2, DRV8301_EN_GPIO_Port, DRV8301_EN_Pin, 0.00005);
 	// init as5048a
 	as5048a_setup(&hspi2, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
+	// start timer task for 20khz
+	//HAL_TIM_Base_Start_IT(&htim3);
+	
 	HAL_TIM_Base_Start(&htim2);
 	svpwm_setup(22.2, 0.00005);
 
@@ -138,7 +144,7 @@ int main(void)
 	while (1)
 	{
 		/* USER CODE END WHILE */
-		pre_counter = __HAL_TIM_GET_COUNTER(&htim2);
+		//pre_counter = __HAL_TIM_GET_COUNTER(&htim2);
 		//svpwm_cal(12, 13);
 		/*Clarke(a, b, c, &alpha, &beta);
 		Park(alpha, beta, theta, &d, &q);
@@ -149,24 +155,41 @@ int main(void)
 			++falut_counter;
 		}*/
 		
-		inverter_get_voltage();
+		//inverter_get_voltage();
 	
-		post_counter = __HAL_TIM_GET_COUNTER(&htim2);
+		/*post_counter = __HAL_TIM_GET_COUNTER(&htim2);
 		total_time += (post_counter - pre_counter);
 		++counter;
 		if (counter == 10000) {
-			sprintf(msg, "time:%lf %f %f \r\n", total_time / 10000.0, so_1_voltage, so_2_voltage);
+			sprintf(msg, "time:%lf %f %f \r\n", total_time / 10000.0, so_1_current, so_2_current);
 			HAL_UART_Transmit(&huart2, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
 			counter = 0;
 			total_time = 0;
 			falut_counter = 0;
-		}
+		}*/
 		//HAL_Delay(1);
 	  
 	 
 		/* USER CODE BEGIN 3 */
 	}
 	/* USER CODE END 3 */
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim->Instance == htim3.Instance) {
+		inverter_set_pwm(duty_cycle / 100.0f * 0.00005f, duty_cycle / 100.0f * 0.00005f, duty_cycle / 100.0f * 0.00005f);
+		++sub_counter;
+		if (sub_counter == 20000)
+		{
+			duty_cycle += 1.0;
+			if (duty_cycle > 100.0)
+			{
+				duty_cycle = 0;
+			}
+			sub_counter = 0;
+		}
+	}
 }
 
 /**
