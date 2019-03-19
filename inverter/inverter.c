@@ -71,7 +71,7 @@ void inverter_init(ADC_HandleTypeDef* a, ADC_HandleTypeDef* b, GPIO_TypeDef* pow
 	HAL_Delay(500);
 	
 	pwm_interval = pwm_interval_;
-	total_counter = 900.0f;
+	total_counter = 449.0f;
 }
 
 void inverter_zero_current()

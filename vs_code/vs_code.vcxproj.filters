@@ -348,6 +348,9 @@
     <ClCompile Include="..\inverter\inverter.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\current_regulator\current_regulator.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\svpwm\svpwm.h">
@@ -363,6 +366,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\inverter\inverter.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\current_regulator\current_regulator.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
