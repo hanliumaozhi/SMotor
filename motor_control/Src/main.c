@@ -157,6 +157,7 @@ int main(void)
 			total_time = 0;
 			falut_counter = 0;
 		}
+		//HAL_Delay(1);
 	  
 	 
 		/* USER CODE BEGIN 3 */
