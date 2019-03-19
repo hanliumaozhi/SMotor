@@ -31,7 +31,7 @@
 #include "string.h"
 #include "svpwm.h"
 #include "coordinate_change.h"
-#include "drv8301.h"
+#include "inverter.h"
 #include "as5048a.h"
 
 /* USER CODE END Includes */
@@ -122,8 +122,10 @@ int main(void)
 	MX_TIM3_Init();
 	MX_USART2_UART_Init();
 	/* USER CODE BEGIN 2 */
-	// init drv8301
-	drv8301_setup(&hspi3, SPI3_EN_GPIO_Port, SPI3_EN_Pin);
+	
+	// init inverter
+	inverter_setup(&htim1, &hspi3, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
+	inverter_init(&hadc1, &hadc2, DRV8301_EN_GPIO_Port, DRV8301_EN_Pin);
 	// init as5048a
 	as5048a_setup(&hspi2, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
 	HAL_TIM_Base_Start(&htim2);
@@ -142,16 +144,18 @@ int main(void)
 		Park(alpha, beta, theta, &d, &q);
 		InvPark(d, q, theta, &alpha, &beta);
 		svpwm_cal(alpha, beta);*/
-		is_error = as5048a_read();
+		/*is_error = as5048a_read();
 		if (!is_error){
 			++falut_counter;
-		}
+		}*/
+		
+		inverter_get_voltage();
 	
 		post_counter = __HAL_TIM_GET_COUNTER(&htim2);
 		total_time += (post_counter - pre_counter);
 		++counter;
 		if (counter == 10000) {
-			sprintf(msg, "time:%lf error:%d p:%f\r\n", total_time / 10000.0, falut_counter, position_val);
+			sprintf(msg, "time:%lf %f %f \r\n", total_time / 10000.0, so_1_voltage, so_2_voltage);
 			HAL_UART_Transmit(&huart2, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
 			counter = 0;
 			total_time = 0;

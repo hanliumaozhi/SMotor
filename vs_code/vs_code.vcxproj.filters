@@ -345,6 +345,9 @@
     <ClCompile Include="..\as5048a\as5048a.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\inverter\inverter.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\svpwm\svpwm.h">
@@ -357,6 +360,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\as5048a\as5048a.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inverter\inverter.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
