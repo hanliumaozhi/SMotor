@@ -351,6 +351,9 @@
     <ClCompile Include="..\current_regulator\current_regulator.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\impedance_controller\impedance_controller.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\svpwm\svpwm.h">
@@ -369,6 +372,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\current_regulator\current_regulator.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\impedance_controller\impedance_controller.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -34,6 +34,7 @@
 #include "inverter.h"
 #include "as5048a.h"
 #include "current_regulator.h"
+#include "impedance_controller.h"
 
 /* USER CODE END Includes */
 
@@ -90,6 +91,10 @@ int main(void)
 	/* USER CODE BEGIN Init */
 	char msg[64];
 	memset(msg, 0, 64);
+	uint32_t total_time = 0;
+	uint32_t counter = 0;
+	uint32_t pre_counter = 0;
+	uint32_t post_counter = 0;
 
 	/* USER CODE END Init */
 
@@ -117,14 +122,20 @@ int main(void)
 	inverter_init(&hadc1, &hadc2, DRV8301_EN_GPIO_Port, DRV8301_EN_Pin, 0.000025);
 	// init as5048a
 	as5048a_setup(&hspi2, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
+	encoder_setup(21.0f);
 	// init svpwm cal
 	svpwm_setup(22.2, 0.000025);
 	// init current regulator
 	current_regulator_setup(0.2046f, 0.1535f);
 	current_regulator_init();
+	
+	// init impedance controller
+	impedance_controller_setup(0.1f, 0.01f, 0.1071);
+	
 	// start timer task for 20khz
 	//HAL_TIM_Base_Start_IT(&htim3);
 	
+	//for get time
 	HAL_TIM_Base_Start(&htim2);
 	
 
@@ -135,8 +146,18 @@ int main(void)
 	while (1)
 	{
 		/* USER CODE END WHILE */
-
 		/* USER CODE BEGIN 3 */
+		pre_counter = __HAL_TIM_GET_COUNTER(&htim2);
+		IC_running(3.1415);
+		post_counter = __HAL_TIM_GET_COUNTER(&htim2);
+		total_time += (post_counter - pre_counter);
+		++counter;
+		
+		if (counter % 10000 == 9999) {
+			sprintf(msg, "time: %f \r\n", total_time/10000.0);
+			HAL_UART_Transmit(&huart2, (uint8_t*) msg, strlen(msg), HAL_MAX_DELAY);
+			total_time = 0;
+		}
 	}
 	/* USER CODE END 3 */
 }
