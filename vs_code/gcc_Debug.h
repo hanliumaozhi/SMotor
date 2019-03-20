@@ -763,6 +763,9 @@
 #ifndef __UDQ_FBIT__
 #define __UDQ_FBIT__ 64
 #endif
+#ifndef DEBUG
+#define DEBUG 1
+#endif
 #ifndef __INT8_TYPE__
 #define __INT8_TYPE__ signed char
 #endif
@@ -1369,15 +1372,6 @@
 #ifndef __ATOMIC_RELEASE
 #define __ATOMIC_RELEASE 3
 #endif
-#ifndef DEBUG
-#define DEBUG 1
-#endif
-#ifndef flash_layout
-#define flash_layout 
-#endif
-#ifndef STM32F303xE
-#define STM32F303xE 
-#endif
 #endif
 
 // --- Include directories begin --- //
@@ -1394,6 +1388,12 @@
 //..\motor_control\Drivers\CMSIS\Device\ST\STM32F3xx\Include
 //..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc
 //..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc\Legacy
+//../svpwm
+//../coordinate_change
+//../drv8301
+//../as5048a
+//../inverter
+//../current_regulator
 // --- Include directories end --- //
 
 

@@ -129,14 +129,14 @@ int main(void)
 	
 	// init inverter
 	inverter_setup(&htim1, &hspi3, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
-	inverter_init(&hadc1, &hadc2, DRV8301_EN_GPIO_Port, DRV8301_EN_Pin, 0.00005);
+	inverter_init(&hadc1, &hadc2, DRV8301_EN_GPIO_Port, DRV8301_EN_Pin, 0.000025);
 	// init as5048a
 	as5048a_setup(&hspi2, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
 	// start timer task for 20khz
 	//HAL_TIM_Base_Start_IT(&htim3);
 	
 	HAL_TIM_Base_Start(&htim2);
-	svpwm_setup(22.2, 0.00005);
+	svpwm_setup(22.2, 0.000025);
 
   /* USER CODE END 2 */
 

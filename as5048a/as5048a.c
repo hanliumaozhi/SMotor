@@ -10,7 +10,14 @@ uint16_t position_val_raw;
 float position_val_raw_f;
 float position_val;
 
+float joint_position_val;
+float joint_position_val_pre;
+float joint_velocity;
+float zero_offset;
+
 uint16_t falut_status;
+
+float magnet_pair_;
 
 
 void as5048a_setup(SPI_HandleTypeDef* spiHandle, GPIO_TypeDef* as5048a_port, uint16_t as5048a_pin)
@@ -42,4 +49,38 @@ bool as5048a_read()
 		// implement some funciton
 		return false;
 	}
+}
+
+void encoder_setup(float magnet_pair)
+{
+	magnet_pair_ = magnet_pair;
+	as5048a_read();
+	zero_offset = position_val;
+}
+
+void get_mech_position(float* mech_position, float inc_time)
+{
+	as5048a_read();
+	joint_position_val_pre = joint_position_val;
+	joint_position_val = (position_val - zero_offset);
+	*mech_position = joint_position_val;
+	
+	//we assume the motor cant move full range
+	joint_velocity = (joint_position_val - joint_position_val_pre) / inc_time;
+	
+}
+
+void get_elec_position(float* elec_position)
+{
+	*elec_position = magnet_pair_*position_val;
+}
+
+void get_mech_velocity(float* mech_velocity)
+{
+	*mech_velocity = joint_velocity;
+}
+
+void get_elec_velocity(float* elec_velocity)
+{
+	*elec_velocity = joint_velocity*magnet_pair_;
 }
