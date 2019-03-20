@@ -13,6 +13,7 @@ void as5048a_setup(SPI_HandleTypeDef* spiHandle, GPIO_TypeDef* as5048a_port, uin
 bool as5048a_read();
 
 void encoder_setup(float magnet_pair);
+void encoder_setup_ex(float magnet_pair, float zero_position);
 void get_mech_position(float* mech_position, float inc_time);
 void get_elec_position(float* elec_position);
 
