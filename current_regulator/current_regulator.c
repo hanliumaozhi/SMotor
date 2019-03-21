@@ -30,7 +30,7 @@ float i_q_error_;
 float i_d_integration_;
 float i_q_integration_;
 
-//ki 0.1535 kp 0.2046
+//ki 0.1881 kp 0.1670
 void current_regulator_setup(float kp, float ki)
 {
 	kp_ = kp;

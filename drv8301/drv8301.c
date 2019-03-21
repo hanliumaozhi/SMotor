@@ -1,7 +1,7 @@
 #include "drv8301.h"
 
 uint16_t write_word;
-uint16_t response_word;
+uint16_t response_word_drv;
 
 GPIO_TypeDef* DRV8301_PORT;
 uint16_t DRV8301_PIN;
@@ -27,7 +27,7 @@ void drv8301_init(void)
 	write_word |= DRV_SPI_WRITE;
 	
 	HAL_GPIO_WritePin(DRV8301_PORT, DRV8301_PIN, GPIO_PIN_RESET);
-	HAL_SPI_TransmitReceive(DRV8301, (uint8_t *)&write_word, (uint8_t *)&response_word, 1, HAL_MAX_DELAY);
+	HAL_SPI_TransmitReceive(DRV8301, (uint8_t *)&write_word, (uint8_t *)&response_word_drv, 1, HAL_MAX_DELAY);
 	HAL_GPIO_WritePin(DRV8301_PORT, DRV8301_PIN, GPIO_PIN_SET);
 
 }

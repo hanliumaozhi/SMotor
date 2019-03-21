@@ -64,6 +64,9 @@
 
 void drv8301_setup(SPI_HandleTypeDef* spiHandle, GPIO_TypeDef* drv8301_port, uint16_t drv8301_pin);
 void drv8301_init(void);
+	 
+	 
+extern uint16_t response_word_drv;
 
 
 

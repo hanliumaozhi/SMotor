@@ -89,13 +89,14 @@ int main(void)
 	HAL_Init();
 
 	/* USER CODE BEGIN Init */
-	char msg[64];
-	memset(msg, 0, 64);
+	char msg[128];
+	memset(msg, 0, 128);
 	uint32_t total_time = 0;
 	uint32_t counter = 0;
 	uint32_t pre_counter = 0;
 	uint32_t post_counter = 0;
 	int max_used_time = 0;
+	int error_counter = 0;
 
 	/* USER CODE END Init */
 
@@ -119,7 +120,7 @@ int main(void)
 	/* USER CODE BEGIN 2 */
 	
 	// init inverter
-	inverter_setup(&htim1, &hspi3, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
+	inverter_setup(&htim1, &hspi3, SPI3_EN_GPIO_Port, SPI3_EN_Pin);
 	inverter_init(&hadc1, &hadc2, DRV8301_EN_GPIO_Port, DRV8301_EN_Pin, 0.000025);
 	// init as5048a
 	as5048a_setup(&hspi2, SPI2_EN_GPIO_Port, SPI2_EN_Pin);
@@ -127,14 +128,14 @@ int main(void)
 	// init svpwm cal
 	svpwm_setup(22.2, 0.000025);
 	// init current regulator
-	current_regulator_setup(0.2046f, 0.1535f);
+	current_regulator_setup(0.167f, 0.1881f);
 	current_regulator_init();
 	
 	// init impedance controller
-	impedance_controller_setup(0.1f, 0.01f, 0.1071);
+	impedance_controller_setup(0.01f, 0.001f, 0.1071);
 	
-	// start timer task for 20khz
-	//HAL_TIM_Base_Start_IT(&htim3);
+	// start timer task for 16khz
+	HAL_TIM_Base_Start_IT(&htim3);
 	
 	//for get time
 	HAL_TIM_Base_Start(&htim2);
@@ -147,10 +148,15 @@ int main(void)
 	while (1)
 	{
 		/* USER CODE END WHILE */
+
 		/* USER CODE BEGIN 3 */
 		pre_counter = __HAL_TIM_GET_COUNTER(&htim2);
 		IC_running(3.1415f);
 		post_counter = __HAL_TIM_GET_COUNTER(&htim2);
+		if (falut_status)
+		{
+			++error_counter;
+		}
 		total_time += (post_counter - pre_counter);
 		if ((post_counter - pre_counter) > max_used_time)
 		{
@@ -159,10 +165,11 @@ int main(void)
 		++counter;
 		
 		if (counter % 10000 == 9999) {
-			sprintf(msg, "time: %f -- %d -- %f \r\n", total_time / 10000.0, max_used_time, joint_position_val);
+			sprintf(msg, "time: %f -- %d -- %f -- %d --%X\r\n", total_time / 10000.0, max_used_time, joint_position_val, error_counter, response_word_drv);
 			HAL_UART_Transmit(&huart2, (uint8_t*) msg, strlen(msg), HAL_MAX_DELAY);
 			total_time = 0;
 			max_used_time = 0;
+			error_counter = 0;
 		}
 	}
 	/* USER CODE END 3 */
@@ -211,7 +218,7 @@ void SystemClock_Config(void)
 	PeriphClkInit.Adc12ClockSelection = RCC_ADC12PLLCLK_DIV1;
 	PeriphClkInit.Tim1ClockSelection = RCC_TIM1CLK_PLLCLK;
 	PeriphClkInit.Tim2ClockSelection = RCC_TIM2CLK_HCLK;
-	PeriphClkInit.Tim34ClockSelection = RCC_TIM34CLK_HCLK;
+	PeriphClkInit.Tim34ClockSelection = RCC_TIM34CLK_PLLCLK;
 	if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
 	{
 		Error_Handler();
@@ -219,6 +226,14 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim->Instance == htim3.Instance) {
+		//HAL_GPIO_TogglePin(DRV8301_EN_GPIO_Port, DRV8301_EN_Pin);
+		//IC_running(3.1415f);
+	}
+}
 
 /* USER CODE END 4 */
 
@@ -229,7 +244,7 @@ void SystemClock_Config(void)
 void Error_Handler(void)
 {
 	/* USER CODE BEGIN Error_Handler_Debug */
-	  /* User can add his own implementation to report the HAL error return state */
+		/* User can add his own implementation to report the HAL error return state */
 
 	/* USER CODE END Error_Handler_Debug */
 }
@@ -245,9 +260,9 @@ void Error_Handler(void)
 void assert_failed(char *file, uint32_t line)
 { 
 	/* USER CODE BEGIN 6 */
-	  /* User can add his own implementation to report the file name and line number,
-	     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-    /* USER CODE END 6 */
+		/* User can add his own implementation to report the file name and line number,
+		   tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	/* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
 

@@ -61,13 +61,15 @@ void inverter_init(ADC_HandleTypeDef* a, ADC_HandleTypeDef* b, GPIO_TypeDef* pow
 	HAL_TIM_PWM_Start(motor_pwm, TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start(motor_pwm, TIM_CHANNEL_3);
 	
-	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_1, 15);
+	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_1, 45);
 	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_2, 0);
 	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_3, 0);
 	
 	HAL_Delay(500);
 	
 	HAL_GPIO_WritePin(POWER_PORT, POWER_PIN, GPIO_PIN_SET);
+	HAL_Delay(500);
+	
 	drv8301_init();
 	
 	HAL_Delay(500);
@@ -125,6 +127,24 @@ void inverter_set_pwm(float a_t, float b_t, float c_t)
 	a_channel_val = (a_t) / pwm_interval*total_counter;
 	b_channel_val = (b_t) / pwm_interval*total_counter;
 	c_channel_val = (c_t) / pwm_interval*total_counter;
+	if (a_channel_val < 22){
+		a_channel_val = 22;
+	}
+	if (a_channel_val > 428){
+		a_channel_val = 428;
+	}
+	if (b_channel_val < 22){
+		b_channel_val = 22;
+	}
+	if (b_channel_val > 428){
+		b_channel_val = 428;
+	}
+	if (c_channel_val < 22){
+		c_channel_val = 22;
+	}
+	if (c_channel_val > 428){
+		c_channel_val = 428;
+	}
 	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_1, a_channel_val);
 	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_2, b_channel_val);
 	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_3, c_channel_val);

@@ -36,7 +36,7 @@ void as5048a_setup(SPI_HandleTypeDef* spiHandle, GPIO_TypeDef* as5048a_port, uin
 bool as5048a_read()
 {
 	HAL_GPIO_WritePin(AS5048A_PORT, AS5048A_PIN, GPIO_PIN_RESET);
-	HAL_SPI_TransmitReceive(&hspi2, (uint8_t *)&cmd_word, (uint8_t *)&position_val_raw, 1, 1);
+	HAL_SPI_TransmitReceive(&hspi2, (uint8_t *)&cmd_word, (uint8_t *)&position_val_raw, 1, 0);
 	HAL_GPIO_WritePin(AS5048A_PORT, AS5048A_PIN, GPIO_PIN_SET);
 	
 	

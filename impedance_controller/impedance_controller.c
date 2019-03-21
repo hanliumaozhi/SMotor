@@ -39,12 +39,12 @@ void IC_running(float position_ref)
 		
 	}*/
 	
-	get_mech_position(&mech_postion__, 0.00005);
+	get_mech_position(&mech_postion__, 0.0000625);
 	get_mech_velocity(&mech_velocity__);
 	get_elec_position(&elec_position__);
 	
 	torque_ = k_p_*(position_ref - mech_postion__) - k_b_*(mech_velocity__);
 	
 	current_regulator_set_current((torque_ / toa_), 0);
-	current_commutate(elec_position__);
+	//current_commutate(elec_position__);
 }
