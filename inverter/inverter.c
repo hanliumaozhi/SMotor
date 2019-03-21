@@ -54,12 +54,14 @@ void inverter_init(ADC_HandleTypeDef* a, ADC_HandleTypeDef* b, GPIO_TypeDef* pow
 	HAL_ADCEx_Calibration_Start(b_adc, ADC_SINGLE_ENDED);
 	HAL_ADC_Start(b_adc);
 	
+	HAL_Delay(500);
+	
 	HAL_TIM_Base_Start(motor_pwm);
 	HAL_TIM_PWM_Start(motor_pwm, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(motor_pwm, TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start(motor_pwm, TIM_CHANNEL_3);
 	
-	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_1, 0);
+	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_1, 15);
 	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_2, 0);
 	__HAL_TIM_SET_COMPARE(motor_pwm, TIM_CHANNEL_3, 0);
 	

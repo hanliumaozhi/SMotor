@@ -76,7 +76,7 @@ void current_commutate(float theta_elec)
 	i_q_pre_ = i_q_;
 	
 	current_controller();
-	InvPark(v_d_, v_q_, theta_elec, &v_alpha_, &v_beta_);
+	InvPark_EX(v_d_, v_q_, &v_alpha_, &v_beta_);
 	svpwm_cal(v_alpha_, v_beta_);
 	inverter_set_pwm(T_a_sv, T_b_sv, T_c_sv);
 }

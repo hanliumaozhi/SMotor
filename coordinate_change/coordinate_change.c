@@ -1,6 +1,5 @@
 
-//#include "arm_math.h"
-#include "math.h"
+#include "arm_math.h"
 #include "coordinate_change.h"
 
 float angle_cos;
@@ -8,8 +7,8 @@ float angle_sin;
 
 void Park(float alpha, float beta, float theta, float *d, float *q)
 {
-	angle_sin = sinf(theta);
-	angle_cos = cosf(theta);
+	angle_sin = arm_sin_f32(theta);
+	angle_cos = arm_cos_f32(theta);
 	*d = angle_cos*alpha + angle_sin*beta;
 	*q = -angle_sin*alpha + angle_cos*beta;
 }
@@ -18,6 +17,12 @@ void InvPark(float d, float q, float theta, float *alpha, float *beta)
 {
 	angle_sin = sinf(theta);
 	angle_cos = cosf(theta);
+	*alpha = d*angle_cos - q*angle_sin;
+	*beta = q*angle_cos + d*angle_sin;
+}
+
+void InvPark_EX(float d, float q, float *alpha, float *beta)
+{
 	*alpha = d*angle_cos - q*angle_sin;
 	*beta = q*angle_cos + d*angle_sin;
 }

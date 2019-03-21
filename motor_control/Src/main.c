@@ -95,6 +95,7 @@ int main(void)
 	uint32_t counter = 0;
 	uint32_t pre_counter = 0;
 	uint32_t post_counter = 0;
+	int max_used_time = 0;
 
 	/* USER CODE END Init */
 
@@ -148,15 +149,20 @@ int main(void)
 		/* USER CODE END WHILE */
 		/* USER CODE BEGIN 3 */
 		pre_counter = __HAL_TIM_GET_COUNTER(&htim2);
-		IC_running(3.1415);
+		IC_running(3.1415f);
 		post_counter = __HAL_TIM_GET_COUNTER(&htim2);
 		total_time += (post_counter - pre_counter);
+		if ((post_counter - pre_counter) > max_used_time)
+		{
+			max_used_time = (post_counter - pre_counter);
+		}
 		++counter;
 		
 		if (counter % 10000 == 9999) {
-			sprintf(msg, "time: %f \r\n", total_time/10000.0);
+			sprintf(msg, "time: %f -- %d -- %f \r\n", total_time / 10000.0, max_used_time, joint_position_val);
 			HAL_UART_Transmit(&huart2, (uint8_t*) msg, strlen(msg), HAL_MAX_DELAY);
 			total_time = 0;
+			max_used_time = 0;
 		}
 	}
 	/* USER CODE END 3 */

@@ -886,6 +886,9 @@
 #ifndef __SIZE_WIDTH__
 #define __SIZE_WIDTH__ 32
 #endif
+#ifndef __FPU_PRESENT
+#define __FPU_PRESENT 1
+#endif
 #ifndef __INT_LEAST16_MAX__
 #define __INT_LEAST16_MAX__ 0x7fff
 #endif
@@ -1383,17 +1386,18 @@
 //$(TOOLCHAIN_ROOT)\lib\gcc\arm-eabi\7.2.0\include-fixed
 //$(TOOLCHAIN_ROOT)\arm-eabi\sys-include
 //$(TOOLCHAIN_ROOT)\arm-eabi\include
-//..\motor_control\Inc
-//..\motor_control\Drivers\CMSIS\Include
-//..\motor_control\Drivers\CMSIS\Device\ST\STM32F3xx\Include
-//..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc
-//..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc\Legacy
 //../svpwm
 //../coordinate_change
 //../drv8301
 //../as5048a
 //../inverter
 //../current_regulator
+//..\motor_control\Inc
+//..\motor_control\Drivers\CMSIS\Include
+//..\motor_control\Drivers\CMSIS\Device\ST\STM32F3xx\Include
+//..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc
+//..\motor_control\Drivers\STM32F3xx_HAL_Driver\Inc\Legacy
+//../impedance_controller
 // --- Include directories end --- //
 
 
